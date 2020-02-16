@@ -1,0 +1,35 @@
+---
+# file: roles/access/tasks/main.yml
+
+- name: Add cluster user
+  user:
+    name: '{{ cluster_user }}'
+    system: yes
+    shell: /bin/bash
+
+- name: Add cluster user .ssh directory
+  file:
+    path: '/home/{{ cluster_user }}/.ssh'
+    state: directory
+    owner: '{{ cluster_user }}'
+    group: '{{ cluster_user }}'
+    mode: 0700
+
+- name: Generate ssh key for cluster user
+  openssh_keypair:
+    path: '/home/{{ cluster_user }}/.ssh/id_rsa'
+    group: '{{ cluster_user }}'
+    owner: '{{ cluster_user }}'
+
+- name: Fetch public keys
+  fetch:
+    flat: true
+    src: '/home/{{ cluster_user }}/.ssh/id_rsa.pub'
+    dest: '/tmp/id_rsa_{{ item }}.pub'
+  with_items: '{{ ansible_play_batch }}'
+
+- name: Add public keys to autohorized_keys
+  authorized_key:
+    user: '{{ cluster_user }}'
+    key: '{{ lookup("file", "/tmp/id_rsa_" + item + ".pub") }}'
+  with_items: '{{ ansible_play_batch }}'

@@ -1,0 +1,8 @@
+---
+- name: Prepare cluster
+  hosts: kubernetes
+  become: yes
+  serial: 49%
+  roles:
+    - docker
+    - access 

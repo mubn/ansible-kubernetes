@@ -1,0 +1,4 @@
+---
+# file: roles/docker/defaults/main.yml
+
+docker_ce_package: 5:18.09.9~3-0~ubuntu-bionic

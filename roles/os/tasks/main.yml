@@ -1,0 +1,34 @@
+---
+# file: roles/os/tasks/main.yml
+
+- name: Upgrade packages
+  apt: 
+    update_cache: yes
+    upgrade: dist
+  register: apt_upgrade
+
+- name: Set hostname 
+  hostname:
+    name: '{{ inventory_hostname }}'
+
+- name: Disable active swap
+  shell: swapoff -a
+
+- name: Remove swap in /etc/fstab
+  mount:
+    path: none
+    fstype: swap
+    state: absent
+
+- name: Add hostnames in etc hosts
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '.*{{ item }}$'
+    line: '{{ hostvars[item].ansible_all_ipv4_addresses[1] }} {{ item }}'
+    state: present
+  with_items: '{{ ansible_play_batch }}'
+
+- name: Reboot system
+  reboot:
+    reboot_timeout: 600
+  when: apt_upgrade is changed
