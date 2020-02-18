@@ -4,3 +4,8 @@
   roles:
     - docker
     - access
+
+- hosts: kubernetes_admin
+  become: true
+  roles:
+    - rke-ansible
