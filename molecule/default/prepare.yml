@@ -1,0 +1,21 @@
+---
+- name: Prepare
+  hosts: all:!localhost
+  gather_facts: false
+  tasks:
+    - name: Add authorized key
+      authorized_key:
+        user: vagrant
+        state: present
+        key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    - name: SSH on every interface
+      become: true
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: 'ListenAddress'
+        line: ListenAddress 0.0.0.0
+    - name: Restart sshd
+      become: true
+      systemd:
+        name: sshd
+        state: reloaded

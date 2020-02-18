@@ -1,0 +1,102 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+lint:
+  name: yamllint
+platforms:
+  - name: test-kubemaster-1
+    box: ubuntu/bionic64
+    groups:
+      - kubernetes_masters
+      - kubernetes
+    memory: 1024
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 192.168.56.11
+  - name: test-kubemaster-2
+    box: ubuntu/bionic64
+    groups:
+      - kubernetes_masters
+      - kubernetes
+    memory: 1024
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 192.168.56.12
+  - name: test-kubemaster-3
+    box: ubuntu/bionic64
+    groups:
+      - kubernetes_masters
+      - kubernetes
+    memory: 1024
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 192.168.56.13
+  - name: test-kubenode-1
+    box: ubuntu/bionic64
+    groups:
+      - kubernetes_nodes
+      - kubernetes
+    memory: 1024
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 192.168.56.21
+  - name: test-kubenode-2
+    box: ubuntu/bionic64
+    groups:
+      - kubernetes_nodes
+      - kubernetes
+    memory: 1024
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 192.168.56.22
+  - name: test-kubenode-3
+    box: ubuntu/bionic64
+    groups:
+      - kubernetes_nodes
+      - kubernetes
+    memory: 1024
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 192.168.56.23
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../../roles
+  inventory:
+    group_vars:
+      all:
+        cluster_user: clusteruser
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
+scenario:
+  test_sequence:
+    - dependency
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - verify
+    - cleanup
+    - destroy

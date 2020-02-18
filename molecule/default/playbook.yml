@@ -1,0 +1,6 @@
+---
+- hosts: kubernetes
+  become: true
+  roles:
+    - docker
+    - access
