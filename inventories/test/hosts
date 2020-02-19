@@ -5,3 +5,5 @@ kubernetes_nodes
 [kubernetes_master]
 
 [kubernetes_nodes]
+
+[kubernetes_admin]

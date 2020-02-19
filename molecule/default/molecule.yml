@@ -80,9 +80,8 @@ provisioner:
   env:
     ANSIBLE_ROLES_PATH: ../../roles
   inventory:
-    group_vars:
-      all:
-        cluster_user: clusteruser
+    links:
+      group_vars: ../../inventories/test/group_vars
   lint:
     name: ansible-lint
 verifier:
