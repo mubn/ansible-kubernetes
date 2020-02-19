@@ -1,8 +1,11 @@
 ---
-- name: Prepare cluster
-  hosts: kubernetes
-  become: yes
-  serial: 49%
+- hosts: kubernetes
+  become: true
   roles:
     - docker
-    - access 
+    - access
+
+- hosts: kubernetes_admin
+  become: true
+  roles:
+    - rke-ansible

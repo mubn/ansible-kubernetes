@@ -1,6 +1,2 @@
 ---
-- hosts: kubernetes
-  become: true
-  roles:
-    - docker
-    - access
+- import_playbook: ../../kubernetes.yml
