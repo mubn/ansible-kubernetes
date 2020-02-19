@@ -1,11 +1,2 @@
 ---
-- hosts: kubernetes
-  become: true
-  roles:
-    - docker
-    - access
-
-- hosts: kubernetes_admin
-  become: true
-  roles:
-    - rke-ansible
+- import_playbook: ../../kubernetes.yml
