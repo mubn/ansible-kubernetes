@@ -1,2 +1,3 @@
 ---
 cluster_user: clusteruser
+ntp_timezone: Europe/Berlin

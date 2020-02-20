@@ -2,6 +2,8 @@
 - hosts: kubernetes
   become: true
   roles:
+    - os
+    - geerlingguy.ntp
     - docker
     - access
 

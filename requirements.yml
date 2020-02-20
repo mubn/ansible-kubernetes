@@ -1,2 +1,3 @@
 ---
+- src: geerlingguy.ntp
 - src: git+https://github.com/mubn/rke-ansible
