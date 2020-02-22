@@ -8,7 +8,7 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: test-kubemaster-1
+  - name: kubemaster-1
     box: ubuntu/bionic64
     groups:
       - kubernetes_masters
@@ -20,7 +20,7 @@ platforms:
         network_name: private_network
         type: static
         ip: 192.168.56.11
-  - name: test-kubemaster-2
+  - name: kubemaster-2
     box: ubuntu/bionic64
     groups:
       - kubernetes_masters
@@ -31,7 +31,7 @@ platforms:
         network_name: private_network
         type: static
         ip: 192.168.56.12
-  - name: test-kubemaster-3
+  - name: kubemaster-3
     box: ubuntu/bionic64
     groups:
       - kubernetes_masters
@@ -42,7 +42,7 @@ platforms:
         network_name: private_network
         type: static
         ip: 192.168.56.13
-  - name: test-kubenode-1
+  - name: kubenode-1
     box: ubuntu/bionic64
     groups:
       - kubernetes_nodes
@@ -53,7 +53,7 @@ platforms:
         network_name: private_network
         type: static
         ip: 192.168.56.21
-  - name: test-kubenode-2
+  - name: kubenode-2
     box: ubuntu/bionic64
     groups:
       - kubernetes_nodes
@@ -64,7 +64,7 @@ platforms:
         network_name: private_network
         type: static
         ip: 192.168.56.22
-  - name: test-kubenode-3
+  - name: kubenode-3
     box: ubuntu/bionic64
     groups:
       - kubernetes_nodes
