@@ -1,0 +1,4 @@
+---
+rke_node_roles:
+  - controlplane
+  - etcd

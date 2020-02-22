@@ -9,5 +9,10 @@
 
 - hosts: kubernetes_admin
   become: true
+  become_user: '{{ cluster_user }}'
+  pre_tasks:
+  - name: Set ssh privat key var dynamically
+    set_fact:
+      rke_ssh_private_key: "{{ lookup('file', '~/.ssh/id_rsa') }}"
   roles:
     - rke-ansible

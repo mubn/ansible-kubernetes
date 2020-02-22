@@ -1,0 +1,3 @@
+---
+rke_node_roles:
+  - worker
