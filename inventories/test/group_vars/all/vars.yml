@@ -2,3 +2,4 @@
 cluster_user: clusteruser
 ntp_timezone: Europe/Berlin
 rke_controller_hostname: kubemaster-1
+cluster_interface: enp0s8

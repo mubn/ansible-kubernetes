@@ -24,7 +24,7 @@
   lineinfile:
     dest: /etc/hosts
     regexp: '.*{{ item }}$'
-    line: '{{ hostvars[item].ansible_all_ipv4_addresses[1] }} {{ item }}'
+    line: "{{ hostvars[item]['ansible_facts'][cluster_interface].ipv4.address }} {{ item }}"
     state: present
   with_items: '{{ ansible_play_batch }}'
 

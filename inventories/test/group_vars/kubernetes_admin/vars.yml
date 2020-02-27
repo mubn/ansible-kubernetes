@@ -2,4 +2,3 @@
 
 rke_ssh_user: '{{ cluster_user }}'
 cluster_name: rke_cluster
-cluster_interface: enp0s8
