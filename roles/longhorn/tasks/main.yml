@@ -1,0 +1,22 @@
+---
+- name: Install Longhorn Requirements
+  become: yes
+  become_user: root
+  apt: 
+    name: open-iscsi
+    state: latest
+    update_cache: yes
+
+- name: Install Longhorn
+  command: kubectl apply -f https://raw.githubusercontent.com/rancher/longhorn/master/deploy/longhorn.yaml
+
+- name: Install storage class
+  shell: |-
+    cat <<EOF | kubectl apply -f-
+    {{ lookup('template', 'storageclass.yaml') }}
+    EOF
+
+- name: Set Longhorn storage class as default
+  shell: >
+    kubectl patch storageclass longhorn -p
+    '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'

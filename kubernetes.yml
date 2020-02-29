@@ -30,3 +30,9 @@
   become_user: '{{ cluster_user }}'
   roles:
     - rke-ansible
+
+- hosts: kubernetes_admin
+  become: true
+  become_user: '{{ cluster_user }}'
+  roles:
+    - longhorn

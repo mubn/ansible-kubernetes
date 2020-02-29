@@ -2,3 +2,4 @@
 
 rke_ssh_user: '{{ cluster_user }}'
 cluster_name: rke_cluster
+longhorn_replicas: 3
