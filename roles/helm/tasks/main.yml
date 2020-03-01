@@ -1,0 +1,20 @@
+---
+- name: Download Helm
+  get_url:
+    url: https://get.helm.sh/helm-{{ helm_version }}-linux-amd64.tar.gz
+    dest: /home/{{ cluster_user }}
+    checksum: '{{ helm_checksum }}'
+  register: helm_tar
+
+- name: Extract Helm
+  block:
+    - unarchive:
+        src: /home/{{ cluster_user }}/helm-{{ helm_version }}-linux-amd64.tar.gz
+        dest: /home/{{ cluster_user }}/
+        remote_src: yes
+    - copy:
+        src: /home/{{ cluster_user }}/linux-amd64/helm
+        dest: /home/{{ cluster_user }}/helm
+        mode: 0744
+        remote_src: yes
+  when: helm_tar is changed
