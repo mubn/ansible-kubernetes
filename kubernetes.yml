@@ -1,4 +1,6 @@
 ---
+# file: kubernetes.yml
+
 - hosts: kubernetes
   become: true
   roles:
@@ -13,8 +15,8 @@
   - name: Fetch public keys
     fetch:
       flat: true
-      src: '/home/{{ cluster_user }}/.ssh/id_rsa.pub'
-      dest: '/tmp/id_rsa_{{ inventory_hostname }}.pub'
+      src: /home/{{ cluster_user }}/.ssh/id_rsa.pub
+      dest: /tmp/id_rsa_{{ inventory_hostname }}.pub
 
 - hosts: kubernetes
   become: true
