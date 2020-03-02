@@ -1,0 +1,14 @@
+---
+# file: roles/cert-manager/tasks/main.yml
+
+- name: Add jetstack helm repo
+  command: helm repo add jetstack https://charts.jetstack.io
+
+- name: Update jetstack helm repo
+  command: helm repo update
+
+- name: Create Kubernetes namespace for cert-manager
+  command: kubectl create namespace cert-manager
+
+- name: Install cert-manager
+  command: helm install jetstack/cert-manager --namespace cert-manager --version {{ cert_manager_version }} jetstack/cert-manager

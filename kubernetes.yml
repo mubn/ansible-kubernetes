@@ -39,3 +39,4 @@
   roles:
     - longhorn
     - helm
+    - cert-manager

@@ -22,3 +22,9 @@
       become: yes
       become_user: root
   when: helm_tar is changed
+
+- name: Add helm default repo
+  command: helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+
+- name: Update default helm repo
+  command: helm repo update
