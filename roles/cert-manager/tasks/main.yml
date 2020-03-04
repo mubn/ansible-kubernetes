@@ -7,8 +7,14 @@
 - name: Update jetstack helm repo
   command: helm repo update
 
+- name: Check if namespace cert-manager exists
+  command: kubectl get namespace cert-manager
+  ignore_errors: yes
+  register: ns_status
+
 - name: Create Kubernetes namespace for cert-manager
   command: kubectl create namespace cert-manager
+  when: ns_status.rc > 0
 
 - name: Install cert-manager
-  command: helm install jetstack/cert-manager --namespace cert-manager --version {{ cert_manager_version }} jetstack/cert-manager
+  command: helm upgrade --install cert-manager --namespace cert-manager --version {{ cert_manager_version }} jetstack/cert-manager
