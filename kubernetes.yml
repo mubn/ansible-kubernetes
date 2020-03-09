@@ -37,6 +37,9 @@
   become: true
   become_user: '{{ cluster_user }}'
   roles:
-    - longhorn
-    - helm
-    - cert-manager
+    - role: longhorn
+      when: install_longhorn | bool
+    - role: helm
+      when: install_helm | bool
+    - role: cert-manager
+      when: install_cert_manager | bool

@@ -3,3 +3,6 @@
 rke_ssh_user: '{{ cluster_user }}'
 cluster_name: rke_cluster
 longhorn_replicas: 3
+install_longhorn: yes
+install_helm: yes
+install_cert_manager: yes
