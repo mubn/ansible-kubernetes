@@ -1,0 +1,17 @@
+---
+
+- name: Verify
+  hosts: all
+  tasks:
+  - name: Get hostname
+    command: hostname
+    register: hostname
+  - name: Check etc hosts
+    shell: >
+      cat /etc/hosts | grep {{ item }}
+    loop: '{{ ansible_play_batch }}'
+    register: etc_hosts
+  - assert:
+      that: '"{{ hostname.stdout }}" == "{{ inventory_hostname }}"'
+  - assert:
+      that: '{{ etc_hosts.results | length }} == 6'
