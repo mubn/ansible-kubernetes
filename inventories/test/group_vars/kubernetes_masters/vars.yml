@@ -1,4 +1,5 @@
 ---
+# Kubernetes node roles
 rke_node_roles:
   - controlplane
   - etcd
