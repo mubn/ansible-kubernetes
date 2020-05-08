@@ -1,4 +1,4 @@
 ---
 # file: roles/cert-manager/defaults/main.yml
 
-cert_manager_version: v0.12.0
+cert_manager_version: v0.15.0
