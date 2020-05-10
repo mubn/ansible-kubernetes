@@ -1,0 +1,29 @@
+---
+# file: roles/rke/templates/cluster.yml
+
+cluster_name: "{{ rke_cluster_name }}"
+
+kubernetes_version: "{{ rke_kubernetes_version }}"
+
+nodes:
+{% for host in groups['kubernetes'] %}
+  - address: {{ hostvars[host]['ansible_' + cluster_interface].ipv4.address }}
+    user: {{ cluster_user }}
+    role:
+{% if host in groups['kubernetes_masters'] %}
+      - controlplane
+      - etcd
+{% else %}
+      - worker
+{% endif %}
+    ssh_key_path: /home/{{ cluster_user }}/.ssh/id_rsa
+{% endfor %}
+
+network:
+  plugin: canal
+  options:
+    canal_iface: "{{ cluster_interface }}"
+
+ingress:
+  provider: nginx
+

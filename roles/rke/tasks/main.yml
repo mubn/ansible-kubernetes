@@ -1,0 +1,53 @@
+---
+# file: roles/rke/tasks/main.yml
+
+- name: Download RKE
+  get_url:
+    url: "{{ rke_cli_url }}"
+    checksum: "{{ rke_cli_hash }}"
+    dest: /usr/local/bin/rke
+    owner: root
+    group: root
+    mode: 0755
+  register: rke_download
+
+- name: Create RKE config directory
+  file:
+    path: /etc/rke
+    state: directory
+    owner: root
+    group: root
+    mode: 0775
+
+- name: Template RKE config
+  template:
+    src: cluster.yml
+    dest: /etc/rke/cluster.yml
+    mode: 0644
+  register: rke_config
+
+- name: Apply RKE config
+  shell: /usr/local/bin/rke up
+  args:
+    chdir: /etc/rke
+  when: rke_download is changed or rke_config is changed
+
+- name: Install kubectl
+  get_url:
+    url: "{{ kubectl_url }}"
+    dest: /usr/local/bin/kubectl
+    mode: 0755
+
+- name: Create .kube directory
+  file:
+    path: /home/{{ cluster_user }}/.kube
+    owner: "{{ cluster_user }}"
+    group: "{{ cluster_user }}"
+    state: directory
+    mode: 0775
+
+- name: Copy kubeconfig to cluster users home
+  copy:
+    remote_src: yes
+    src: /etc/rke/kube_config_cluster.yml
+    dest: /home/{{ cluster_user }}/.kube/config

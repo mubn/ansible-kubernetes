@@ -1,8 +1,6 @@
 ---
-# System user, with which the cluster runs
-rke_ssh_user: '{{ cluster_user }}'
 # Name of the cluster
-cluster_name: rke_cluster
+rke_cluster_name: rke_cluster
 # Persistent volume replicas
 longhorn_replicas: 3
 # Feature flags
