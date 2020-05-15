@@ -27,7 +27,7 @@
       key: '{{ lookup("file", "/tmp/id_rsa_" + item + ".pub") }}'
     with_items: '{{ ansible_play_batch }}'
 
-- hosts: kubernetes
+- hosts: kubernetes_admin
   become: true
   roles:
     - rke
