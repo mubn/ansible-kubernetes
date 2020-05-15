@@ -10,6 +10,7 @@
 - name: Check if namespace cert-manager exists
   command: kubectl get namespace cert-manager
   ignore_errors: yes
+  changed_when: no
   register: ns_status
 
 - name: Create Kubernetes namespace for cert-manager

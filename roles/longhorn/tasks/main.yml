@@ -7,11 +7,22 @@
     state: latest
     update_cache: yes
 
+- name: Check if longhorn namespace exists
+  command: kubectl get namespace longhorn-system
+  ignore_errors: yes
+  changed_when: no
+  register: longhorn_status
+
 - name: Install Longhorn
   command: kubectl apply -f https://raw.githubusercontent.com/rancher/longhorn/master/deploy/longhorn.yaml
+  when: longhorn_status.rc > 0
 
 - name: Install storage class
   shell: |-
+    cat <<EOF | kubectl delete -f-
+    {{ lookup('template', 'storageclass.yaml') }}
+    EOF
+
     cat <<EOF | kubectl apply -f-
     {{ lookup('template', 'storageclass.yaml') }}
     EOF
