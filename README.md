@@ -16,9 +16,15 @@ ansible-playbook -i <YOURINVENTORY> kubernetes.yml
 
 # Tests
 
-[Ansible Molecule](https://github.com/ansible-community/molecule), [Vagrant](https://github.com/hashicorp/vagrant) and [VirtualBox](https://www.virtualbox.org/) need to be installed to build the cluster locally and to start the tests.
+[Ansible Molecule](https://github.com/ansible-community/molecule), [Molecule-Vagrant](https://github.com/ansible-community/molecule-vagrant), [Vagrant](https://github.com/hashicorp/vagrant) and [VirtualBox](https://www.virtualbox.org/) need to be installed to build the cluster locally and to start the tests.
 
-Molecule has been "misused" in this project. Normally used to test single Ansible roles,
+```
+sudo apt install virtualbox vagrant python3-pip
+pip3 install molecule
+pip3 install molecule-vagrant
+```
+
+Ansible Molecule has been "misused" in this project. Normally used to test single Ansible roles,
 it is used to test the whole playbook here.
 
 The cluster will be started and tested locally with Ansible Molecule. Simply run `molecule converge`
