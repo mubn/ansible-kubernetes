@@ -1,8 +1,8 @@
 [kubernetes:children]
-kubernetes_master
+kubernetes_masters
 kubernetes_nodes
 
-[kubernetes_master]
+[kubernetes_masters]
 
 [kubernetes_nodes]
 
