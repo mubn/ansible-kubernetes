@@ -13,6 +13,9 @@ nodes:
 {% if host in groups['kubernetes_masters'] %}
       - controlplane
       - etcd
+{% if host in groups['kubernetes_nodes'] %}
+      - worker
+{% endif %}
 {% else %}
       - worker
 {% endif %}
