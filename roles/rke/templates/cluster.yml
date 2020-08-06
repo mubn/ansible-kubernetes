@@ -27,6 +27,7 @@ network:
   options:
     canal_iface: "{{ cluster_interface }}"
 
+{% if rke_cluster_ingress.enable is sameas true %}
 ingress:
-  provider: nginx
-
+  provider: {{ rke_cluster_ingress.provider }}
+{% endif %}
