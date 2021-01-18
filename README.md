@@ -1,8 +1,10 @@
 # Kubernetes cluster installation
 
-This set of Ansible roles creates a fully operational cluster from scratch. At least two Debian-based machines are needed. 
-System settings, ssh access between all nodes with auto generated keys, Docker will be installed. Then a Kubernetes cluster will be set up with [RKE](https://rancher.com/docs/rke/latest/en/).
-Additionally a distributed block storage system [Longhorn](https://github.com/longhorn/longhorn) and the [Cert-Manager](https://github.com/jetstack/cert-manager) can be added.
+This set of Ansible roles creates a fully operational cluster from scratch. At least two Debian-based machines with base settings are needed. The machine running this Playbook needs to have ssh access to those servers.
+
+The required system settings, the ssh access between all nodes with auto generated keys will be set up and Docker will be installed. Then a Kubernetes cluster will be set up with [RKE](https://rancher.com/docs/rke/latest/en/).
+
+Also a distributed block storage system [Longhorn](https://github.com/longhorn/longhorn) and the [Cert-Manager](https://github.com/jetstack/cert-manager) will be added if you enable this options in the host vars for the admin node.
 
 # Run
 
