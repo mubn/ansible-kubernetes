@@ -87,6 +87,9 @@ provisioner:
       group_vars: ../../inventories/test/group_vars
   lint:
     name: ansible-lint
+  config_options:
+    ssh_connection:
+      pipelining: True
 verifier:
   name: ansible
   lint:
