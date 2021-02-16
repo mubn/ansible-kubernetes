@@ -12,7 +12,7 @@ lint: |
   flake8
 platforms:
   - name: kubemaster-1
-    box: ubuntu/bionic64
+    box: ubuntu/focal64
     groups:
       - kubernetes_masters
       - kubernetes
@@ -24,7 +24,7 @@ platforms:
         type: static
         ip: 192.168.56.11
   - name: kubemaster-2
-    box: ubuntu/bionic64
+    box: ubuntu/focal64
     groups:
       - kubernetes_masters
       - kubernetes
@@ -35,7 +35,7 @@ platforms:
         type: static
         ip: 192.168.56.12
   - name: kubemaster-3
-    box: ubuntu/bionic64
+    box: ubuntu/focal64
     groups:
       - kubernetes_masters
       - kubernetes
@@ -46,7 +46,7 @@ platforms:
         type: static
         ip: 192.168.56.13
   - name: kubenode-1
-    box: ubuntu/bionic64
+    box: ubuntu/focal64
     groups:
       - kubernetes_nodes
       - kubernetes
@@ -57,7 +57,7 @@ platforms:
         type: static
         ip: 192.168.56.21
   - name: kubenode-2
-    box: ubuntu/bionic64
+    box: ubuntu/focal64
     groups:
       - kubernetes_nodes
       - kubernetes
@@ -68,7 +68,7 @@ platforms:
         type: static
         ip: 192.168.56.22
   - name: kubenode-3
-    box: ubuntu/bionic64
+    box: ubuntu/focal64
     groups:
       - kubernetes_nodes
       - kubernetes

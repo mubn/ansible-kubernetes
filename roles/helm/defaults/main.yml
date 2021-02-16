@@ -1,5 +1,5 @@
 ---
 # file: roles/helm/defaults/main.yml
 
-helm_version: v3.2.1
-helm_checksum: sha256:018f9908cb950701a5d59e757653a790c66d8eda288625dbb185354ca6f41f6b
+helm_version: v3.5.2
+helm_checksum: sha256:01b317c506f8b6ad60b11b1dc3f093276bb703281cb1ae01132752253ec706a2
