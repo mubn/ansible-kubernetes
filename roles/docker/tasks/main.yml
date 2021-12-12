@@ -1,5 +1,32 @@
 ---
 # file: roles/docker/tasks/main.yml
+- name: Determine docker installation status
+  command: "dpkg-query --showformat='${db:Status-Status}' --show docker-ce"
+  register: docker_installed_status
+  ignore_errors: true
+  changed_when: false
+
+- set_fact:
+    docker_is_installed: "{{ docker_installed_status.stdout == 'installed' }}"
+  changed_when: false
+
+- debug:
+    var: docker_is_installed
+
+- name: Determine installed docker version
+  command: "dpkg-query --showformat='${Version}' --show docker-ce"
+  register: docker_installed_version
+  when: docker_is_installed|bool
+  changed_when: false
+  tags: debug
+
+- set_fact:
+    docker_is_version: "{{ docker_installed_version.stdout }}"
+  when: docker_is_installed|bool
+  changed_when: false
+
+- debug:
+    var: docker_is_version
 
 - name: Install dependencies
   apt:
@@ -19,15 +46,31 @@
     state: present
     filename: docker
 
-- name: Pin the Docker version
-  template:
-    src: docker-ce-pin.j2
-    dest: /etc/apt/preferences.d/docker-ce
+- block:
+  - name: Unhold Docker
+    dpkg_selections:
+      name: docker-ce
+      selection: install
+  - name: Remove Docker if installed version differs
+    apt:
+      name:
+        - docker*
+        - containerd.io
+      state: absent
+      autoremove: yes
+  - name: Reboot system
+    reboot:
+      reboot_timeout: 600
+  when: docker_is_installed|bool and docker_is_version != docker_ce_package
 
 - name: Install Docker
   apt:
     name: docker-ce={{ docker_ce_package }}
-    force: yes
+
+- name: Prevent upgrades Docker
+  dpkg_selections:
+    name: docker-ce
+    selection: hold
 
 - name: Add cluster user to docker group
   user:
