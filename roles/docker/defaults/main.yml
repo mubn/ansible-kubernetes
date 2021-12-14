@@ -1,4 +1,4 @@
 ---
 # file: roles/docker/defaults/main.yml
 
-docker_ce_package: 5:19.03.9~3-0~ubuntu-focal
+docker_ce_package: 5:20.10.11~3-0~ubuntu-focal

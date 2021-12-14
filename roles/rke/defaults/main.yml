@@ -1,7 +1,7 @@
-rke_cli_url: https://github.com/rancher/rke/releases/download/v1.2.5/rke_linux-amd64
-rke_cli_hash: sha256:77d2dc6af0d9388cba7dddea9ce3339d8e99618a32da68d043018ef63840bc6f
-kubectl_url: https://storage.googleapis.com/kubernetes-release/release/v1.19.7/bin/linux/amd64/kubectl
-rke_kubernetes_version: v1.19.7-rancher1-1
+rke_cli_url: https://github.com/rancher/rke/releases/download/v1.3.2/rke_linux-amd64
+rke_cli_hash: sha256:11c2534a97d24c9ad8148c10b344cfbd0ec220c9bd18bf00d55cb508f6fb5403
+kubectl_url: https://storage.googleapis.com/kubernetes-release/release/v1.23.0/bin/linux/amd64/kubectl
+rke_kubernetes_version: v1.21.6-rancher1-1
 rke_cluster_name: rke_cluster
 rke_cluster_ingress:
   enable: yes
