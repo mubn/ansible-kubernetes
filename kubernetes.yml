@@ -33,7 +33,6 @@
     - rke
 
 - hosts: kubernetes_admin
-  become: true
   become_user: '{{ cluster_user }}'
   roles:
     - role: longhorn
