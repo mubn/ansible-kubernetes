@@ -2,8 +2,8 @@
 # Name of the cluster
 rke_cluster_name: rke_cluster
 # Persistent volume replicas
-longhorn_replicas: 3
+longhorn_replicas: 1
 # Feature flags
-install_longhorn: no
+install_longhorn: yes
 install_helm: yes
 install_cert_manager: yes

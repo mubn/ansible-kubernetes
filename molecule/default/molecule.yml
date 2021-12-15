@@ -16,68 +16,34 @@ platforms:
     groups:
       - kubernetes_masters
       - kubernetes
-      - kubernetes_admin
-    memory: 1024
+    memory: 2048
     interfaces:
       - auto_config: true
         network_name: private_network
         type: static
         ip: 192.168.56.11
-  - name: kubemaster-2
-    box: ubuntu/focal64
-    groups:
-      - kubernetes_masters
-      - kubernetes
-    memory: 1024
-    interfaces:
-      - auto_config: true
-        network_name: private_network
-        type: static
-        ip: 192.168.56.12
-  - name: kubemaster-3
-    box: ubuntu/focal64
-    groups:
-      - kubernetes_masters
-      - kubernetes
-    memory: 1024
-    interfaces:
-      - auto_config: true
-        network_name: private_network
-        type: static
-        ip: 192.168.56.13
   - name: kubenode-1
     box: ubuntu/focal64
     groups:
       - kubernetes_nodes
       - kubernetes
-    memory: 1024
+    memory: 2048
     interfaces:
       - auto_config: true
         network_name: private_network
         type: static
         ip: 192.168.56.21
-  - name: kubenode-2
+  - name: kubeadmin-1
     box: ubuntu/focal64
     groups:
-      - kubernetes_nodes
+      - kubernetes_admin
       - kubernetes
     memory: 1024
     interfaces:
       - auto_config: true
         network_name: private_network
         type: static
-        ip: 192.168.56.22
-  - name: kubenode-3
-    box: ubuntu/focal64
-    groups:
-      - kubernetes_nodes
-      - kubernetes
-    memory: 1024
-    interfaces:
-      - auto_config: true
-        network_name: private_network
-        type: static
-        ip: 192.168.56.23
+        ip: 192.168.56.31
 provisioner:
   name: ansible
   env:
