@@ -88,7 +88,7 @@ provisioner:
   lint:
     name: ansible-lint
   config_options:
-    ssh_connection:
+    defaults:
       pipelining: True
 verifier:
   name: ansible
