@@ -1,9 +1,11 @@
 ---
 # System user with which the cluster runs
 cluster_user: clusteruser
+# Interface name with which the vms are interconnected
+cluster_interface: enp0s8
 # Time zone of the cluster
 ntp_timezone: Europe/Berlin
 # Host name of the admin machine
 rke_controller_hostname: kubemaster-1
-# Interface name with which the vms are interconnected
-cluster_interface: enp0s8
+# Only reboot on initial installation
+os_reboot_after_upgrade: false

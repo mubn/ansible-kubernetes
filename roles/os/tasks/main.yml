@@ -28,7 +28,12 @@
     state: present
   with_items: '{{ ansible_play_batch }}'
 
+- name: Check if reboot required
+  stat:
+    path: /var/run/reboot-required
+  register: reboot_required
+
 - name: Reboot system
   reboot:
     reboot_timeout: 600
-  when: apt_upgrade is changed
+  when: reboot_required.stat.exists == true and os_reboot_after_upgrade == true
